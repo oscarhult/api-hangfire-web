@@ -23,7 +23,7 @@ WebHost
   })
   .Configure(x =>
   {
-    var fileProvider = new EmbeddedFileProvider(typeof(Program).Assembly, "app.wwwroot");
+    var fileProvider = new EmbeddedFileProvider(typeof(Program).Assembly, "app.Website");
     x.UseDefaultFiles(new DefaultFilesOptions { FileProvider = fileProvider });
     x.UseStaticFiles(new StaticFileOptions { FileProvider = fileProvider });
 
