@@ -18,7 +18,11 @@ WebHost
     x.AddHealthChecks().AddCheck<ApiHealthCheck>("ApiHealth");
     x.AddHttpClient();
     x.AddControllers();
-    x.AddHangfire(y => y.UseInMemoryStorage());
+    x.AddHangfire(y =>
+    {
+      y.UseInMemoryStorage();
+      y.UseDarkModeSupportForDashboard();
+    });
     x.AddHangfireServer();
   })
   .Configure(x =>
@@ -31,7 +35,13 @@ WebHost
     x.UseEndpoints(x =>
     {
       x.MapHealthChecks("/health");
-      x.MapHangfireDashboard(new DashboardOptions { Authorization = new[] { new AllowAllConnectionsFilter() } });
+      x.MapHangfireDashboard(new DashboardOptions
+      {
+        DisplayStorageConnectionString = false,
+        Authorization = new[] { new AllowAllConnectionsFilter() },
+        DashboardTitle = "Hangfire",
+        AppPath = null,
+      });
       x.MapControllers();
     });
 
