@@ -10,7 +10,6 @@ using System.Globalization;
 
 WebHost
   .CreateDefaultBuilder()
-  .UseUrls("http://+:5555")
   .ConfigureServices(x =>
   {
     CultureInfo.DefaultThreadCurrentCulture = CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
